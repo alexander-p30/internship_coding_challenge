@@ -14,7 +14,7 @@ module Models
       @@instances << self
     end
 
-    attr_reader :user_id, :confirmed_at, :start_date, :end_date
+    attr_reader :user_id, :type, :confirmed_at, :start_date, :end_date
 
     def absentee
       Member.all.find { |m| m.user_id == @user_id }
