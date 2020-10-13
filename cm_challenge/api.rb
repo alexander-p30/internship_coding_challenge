@@ -20,7 +20,7 @@ module CmChallenge
       end
 
       def symbolize_collection(collection)
-        collection.map { |hash| symbolize_hash(hash)}
+        collection.map { |hash| symbolize_hash(hash) }
       end
 
       def symbolize_hash(hash)
