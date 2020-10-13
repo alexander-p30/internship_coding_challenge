@@ -13,3 +13,7 @@ Style/Documentation:
 
 Style/BlockComments:
   Enabled: false
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'utils/seeder.rb'
