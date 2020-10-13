@@ -1,6 +1,6 @@
 module Models
-  # Absence model, which contains: absentee (class instance), user_id, type and
-  # start and end date
+  # Absence model, which contains: user id, crew id, type, confirmation date
+  # and start and end date
   class Absence
     @@instances = []
 
