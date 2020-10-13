@@ -4,16 +4,19 @@ module Models
   class Absence
     @@instances = []
 
-    def initialize(absentee, user_id, type, start_date, end_date)
-      @absentee = absentee
-      @user_id = user_id
-      @type = type
-      @start_date = start_date
-      @end_date = end_date
+    def initialize(absence_hash_data)
+      @user_id = absence_hash_data[:user_id]
+      @type = absence_hash_data[:type]
+      @start_date = absence_hash_data[:start_date]
+      @end_date = absence_hash_data[:end_date]
       @@instances << self
     end
 
     attr_reader :user_id, :start_date, :end_date
+
+    def absentee
+      Member.all.find { |m| m.user_id == @user_id }
+    end
 
     def description
       absence_types_description = {
@@ -21,7 +24,7 @@ module Models
         'vacation' => 'is on vacation'
       }
 
-      "#{@absentee.name} #{absence_types_description[@type]}"
+      "#{absentee.name} #{absence_types_description[@type]}"
     end
 
     def self.all

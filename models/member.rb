@@ -3,16 +3,16 @@ module Models
   class Member
     @@instances = []
 
-    def initialize(name, user_id, crew_id)
-      @name = name
-      @user_id = user_id
-      @crew_id = crew_id
+    def initialize(member_data_hash)
+      @name = member_data_hash[:name]
+      @user_id = member_data_hash[:user_id]
+      @crew_id = member_data_hash[:crew_id]
       @@instances << self
     end
 
     attr_reader :name, :user_id
 
-    def all
+    def self.all
       @@instances
     end
   end
