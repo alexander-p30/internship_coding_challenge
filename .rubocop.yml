@@ -1,0 +1,15 @@
+Style/ClassVars:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - 'cm_challenge/*'
+
+Style/BlockComments:
+  Enabled: false
