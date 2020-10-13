@@ -6,13 +6,15 @@ module Models
 
     def initialize(absence_hash_data)
       @user_id = absence_hash_data[:user_id]
+      @crew_id = absence_hash_data[:crew_id]
       @type = absence_hash_data[:type]
+      @confirmed_at = absence_hash_data[:confirmed_at]
       @start_date = absence_hash_data[:start_date]
       @end_date = absence_hash_data[:end_date]
       @@instances << self
     end
 
-    attr_reader :user_id, :start_date, :end_date
+    attr_reader :user_id, :confirmed_at, :start_date, :end_date
 
     def absentee
       Member.all.find { |m| m.user_id == @user_id }
@@ -29,6 +31,14 @@ module Models
 
     def self.all
       @@instances
+    end
+
+    def self.pending_absences
+      all.reject(&:confirmed_at)
+    end
+
+    def self.confirmed_absences
+      all.select(&:confirmed_at)
     end
   end
 end
