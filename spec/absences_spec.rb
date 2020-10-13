@@ -8,7 +8,7 @@ RSpec.describe 'Absences' do
   end
 
   before(:example) do
-    @absences_controller = CmChallenge::Absences.new
+    @absences_controller = CmChallenge::Absences
     @absence_klass = Models::Absence
   end
 
