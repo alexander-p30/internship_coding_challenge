@@ -1,2 +1,5 @@
 # Ignores jetbrains IDE stuff
 .idea
+
+# Ignores generated ics file
+storage/result.ics
