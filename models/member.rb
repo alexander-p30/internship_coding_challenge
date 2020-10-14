@@ -23,5 +23,9 @@ module Models
     def self.all
       @@instances
     end
+
+    def self.find_by_user_id(user_id)
+      all.find { |m| m.user_id.to_s == user_id.to_s }
+    end
   end
 end

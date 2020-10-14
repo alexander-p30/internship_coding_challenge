@@ -17,7 +17,7 @@ module Models
     attr_reader :user_id, :type, :confirmed_at, :start_date, :end_date
 
     def absentee
-      Member.all.find { |m| m.user_id == @user_id }
+      Member.find_by_user_id(@user_id)
     end
 
     def description
