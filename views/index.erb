@@ -1,7 +1,10 @@
 <head>
   <title>Homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+  <link
+    href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css'
+    rel='stylesheet'
+  />
   <style>
     body {
       background-color: darkslateblue;
@@ -87,7 +90,9 @@
   <% end %>
 
   <h4 class="text-center">Confirmed absences</h4>
-  <div class="d-flex flex-column flex-lg-row justify-content-around list-wrapper">
+  <div
+    class="d-flex flex-column flex-lg-row justify-content-around list-wrapper"
+  >
     <ul>
       <% if !@confirmed_absences.empty? %>
         <% @confirmed_absences.each do |abs| %>
@@ -98,13 +103,18 @@
           </li>
         <% end %>
       <% else %>
-        <li>There are no confirmed absences <%= @start_date || @end_date ? "for this time period" : nil %>.</li>
+        <li>
+          There are no confirmed absences
+          <%= @start_date || @end_date ? "for this time period" : nil %>.
+        </li>
       <% end %>
     </ul>
   </div>
 
   <h4 class="text-center">Pending absences</h4>
-  <div class="d-flex flex-column flex-lg-row justify-content-around list-wrapper">
+  <div
+    class="d-flex flex-column flex-lg-row justify-content-around list-wrapper"
+  >
     <ul>
       <% if !@pending_absences.empty? %>
         <% @pending_absences.each do |abs| %>
@@ -115,7 +125,10 @@
           </li>
         <% end %>
       <% else %>
-        <li>There are no pending absences <%= @start_date || @end_date ? "for this time period" : nil %>.</li>
+        <li>
+          There are no pending absences
+          <%= @start_date || @end_date ? "for this time period" : nil %>.
+        </li>
       <% end %>
     </ul>
   </div>
