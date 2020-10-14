@@ -63,9 +63,9 @@ module CmChallenge
         abs_start_date = absence.start_date_as_date
         abs_end_date = absence.end_date_as_date
 
-        starts_within_time = (abs_start_date >= start_date ||
+        starts_within_time = (abs_start_date >= start_date &&
                                 abs_start_date <= end_date)
-        ends_within_time = (abs_end_date >= start_date ||
+        ends_within_time = (abs_end_date >= start_date &&
                               abs_end_date <= end_date)
 
         starts_within_time || ends_within_time
