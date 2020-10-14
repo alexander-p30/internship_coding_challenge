@@ -1,6 +1,8 @@
 require_relative './api'
 require_relative '../models/absence'
+require_relative '../models/member'
 require 'icalendar'
+require 'date'
 
 module CmChallenge
   class Absences
@@ -9,21 +11,23 @@ module CmChallenge
         absences = Models::Absence.confirmed_absences
         calendar = Icalendar::Calendar.new
         absences.each { |abs| calendar.add_event(create_calendar_event(abs)) }
-
+        # Returns the iCal string, ready to be written into a ics file
         calendar.to_ical
       end
 
-      def list
-        confirmed_absences = Models::Absence.confirmed_absences
-        pending_absences = Models::Absence.pending_absences
-        {
-          confirmed: confirmed_absences.map do |abs|
-            create_absence_hash(abs)
-          end,
-          pending: pending_absences.map do |abs|
-            create_absence_hash(abs)
-          end
-        }
+      def list(user, start_date, end_date)
+        confirmed = Models::Absence.confirmed_absences
+        pending = Models::Absence.pending_absences
+
+        start_date ||= '1900-01-01'
+        end_date ||= '9999-12-31'
+
+        if user
+          confirmed = user.confirmed_absences
+          pending = user.pending_absences
+        end
+
+        filter_absences_by_date(confirmed, pending, start_date, end_date)
       end
 
       private
@@ -41,6 +45,20 @@ module CmChallenge
           start_date: absence.start_date,
           end_date: absence.end_date,
           description: absence.description }
+      end
+
+      def filter_absences_by_date(confirmed, pending, start_date, end_date)
+        start_date = Date.parse(start_date)
+        end_date = Date.parse(end_date)
+
+        [confirmed.select do |abs|
+           (Date.parse(abs.start_date) >= start_date &&
+             Date.parse(abs.end_date) <= end_date)
+         end,
+         pending.select do |abs|
+           (Date.parse(abs.start_date) >= start_date &&
+             Date.parse(abs.end_date) <= end_date)
+         end]
       end
     end
   end
