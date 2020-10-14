@@ -6,6 +6,7 @@ require 'icalendar'
 require 'date'
 
 module CmChallenge
+  # Interface for interacting with the classes
   class Absences
     class << self
       def to_ical
@@ -16,6 +17,8 @@ module CmChallenge
         calendar.to_ical
       end
 
+      # Returns an array of Models::Absence instances according to the params
+      # provided
       def list(user, start_date, end_date)
         if user
           confirmed = user.confirmed_absences
@@ -25,6 +28,7 @@ module CmChallenge
           pending = Models::Absence.pending_absences
         end
 
+        # If date values are nil, uses default defined values instead
         start_date ||= DateHelper::DEFAULT_START_DATE
         end_date ||= DateHelper::DEFAULT_END_DATE
 
@@ -37,6 +41,7 @@ module CmChallenge
 
       private
 
+      # Creates calendar event by using Models::Absence instance
       def create_calendar_event(absence)
         e = Icalendar::Event.new
         e.dtstart = Icalendar::Values::Date.new absence.start_date.tr('-', '')

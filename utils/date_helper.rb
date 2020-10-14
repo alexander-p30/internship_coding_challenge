@@ -16,6 +16,7 @@ module DateHelper
     [Date.parse(DEFAULT_START_DATE), Date.parse(DEFAULT_END_DATE)]
   end
 
+  # Checks if absence start or end date are within the supplied date range
   def self.check_date_range(absence, start_date, end_date)
     abs_start_date = absence.start_date_as_date
     abs_end_date = absence.end_date_as_date
