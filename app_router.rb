@@ -1,5 +1,4 @@
 require_relative './utils/setup'
-require_relative 'models/member'
 
 require 'sinatra'
 
@@ -7,18 +6,15 @@ require 'sinatra'
 set :port, 3000
 
 get '/' do
-  @user = Models::Member.find_by_user_id(params[:userId])
+  @user = CONTROLLER.find_member_by_user_id(params[:userId])
   @start_date = params[:startDate]
   @end_date = params[:endDate]
-  @confirmed_absences, @pending_absences = ABSENCES_CONTROLLER.list(
+
+  @confirmed_absences, @pending_absences = CONTROLLER.list(
     @user, @start_date, @end_date
   )
 
-  if params[:userId] && @user
-    erb :user
-  else
-    erb :index
-  end
+  erb :index
 end
 
 get '/download_calendar' do
