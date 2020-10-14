@@ -16,7 +16,7 @@ The application has a very basic html presentation. Colors may look oversaturate
 
 ## Available routes
 
-* '/' => shows a list of confirmed and pending absences; the page has a download button for the ics calendar
+* '/' => shows a list of confirmed and pending absences. The page shows a download button for the ics calendar when there are no query params.
 
 ## Working query params
 
