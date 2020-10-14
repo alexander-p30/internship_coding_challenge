@@ -29,6 +29,14 @@ module Models
       "#{absentee.name} #{absence_types_description[@type]}"
     end
 
+    def start_date_as_date
+      Date.parse(@start_date)
+    end
+
+    def end_date_as_date
+      Date.parse(@start_date)
+    end
+
     def self.all
       @@instances
     end
