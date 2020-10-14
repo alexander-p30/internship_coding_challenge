@@ -5,11 +5,14 @@ require_relative '../utils/seeder'
 RSpec.describe 'Absences' do
   before(:context) do
     Seeder.populate_classes_from_api
+    @absences_controller = CmChallenge::Absences
+    @absence_klass = Models::Absence
   end
 
   before(:example) do
-    @absences_controller = CmChallenge::Absences
-    @absence_klass = Models::Absence
+    @user = Models::Member.find_by_user_id(644)
+    @start_date = nil
+    @end_date = '2017-03-13'
   end
 
   describe '#to_ical' do
@@ -26,16 +29,34 @@ RSpec.describe 'Absences' do
   end
 
   describe '#list' do
-    let(:list) { @absences_controller.list }
+    context 'absences for user_id 644 until 2017-03-13' do
 
-    it { expect(list).to respond_to(:keys) }
-    it { expect(list.keys.length).to eql(2) }
-    it { expect(list).to respond_to(:values) }
-    # Checks if the structure of the hashes inside the confirmed and pending
-    # keys is correct
-    it { expect(list.values.flatten).to all(have_key(:absentee_name)) }
-    it { expect(list.values.flatten).to all(have_key(:start_date)) }
-    it { expect(list.values.flatten).to all(have_key(:end_date)) }
-    it { expect(list.values.flatten).to all(have_key(:description)) }
+      let(:list) { @absences_controller.list(@user, @start_date, @end_date) }
+      let(:users_confirmed_absences) do
+        @user.confirmed_absences.select do |abs|
+          Date.parse(abs.start_date) >= Date.parse(@start_date) &&
+            Date.parse(abs.end_date) <= Date.parse(@end_date)
+        end
+      end
+      let(:users_pending_absences) do
+        @user.pending_absenses.select do |abs|
+          Date.parse(abs.start_date) >= Date.parse(@start_date) &&
+            Date.parse(abs.end_date) <= Date.parse(@end_date)
+        end
+      end
+
+      # Checks if all the confirmed/pending absences for the time period are
+      # correctly returned
+      it { expect(list[0].length).to eql(6) }
+      it { expect(list[1].length).to eql(1) }
+      # Checks if returned list contains only objects of the Absence
+      it { expect(list.flatten).to all(respond_to(:user_id)) }
+      it { expect(list.flatten).to all(respond_to(:type)) }
+      it { expect(list.flatten).to all(respond_to(:confirmed_at)) }
+      it { expect(list.flatten).to all(respond_to(:start_date)) }
+      it { expect(list.flatten).to all(respond_to(:end_date)) }
+      it { expect(list.flatten).to all(respond_to(:absentee)) }
+      it { expect(list.flatten).to all(respond_to(:description)) }
+    end
   end
 end
