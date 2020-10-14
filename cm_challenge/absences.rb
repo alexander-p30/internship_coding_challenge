@@ -52,13 +52,23 @@ module CmChallenge
         end_date = Date.parse(end_date)
 
         [confirmed.select do |abs|
-           (Date.parse(abs.start_date) >= start_date &&
-             Date.parse(abs.end_date) <= end_date)
+           check_date_range(abs, start_date, end_date)
          end,
          pending.select do |abs|
-           (Date.parse(abs.start_date) >= start_date &&
-             Date.parse(abs.end_date) <= end_date)
+           check_date_range(abs, start_date, end_date)
          end]
+      end
+
+      def check_date_range(absence, start_date, end_date)
+        abs_start_date = absence.start_date_as_date
+        abs_end_date = absence.end_date_as_date
+
+        starts_within_time = (abs_start_date >= start_date ||
+                                abs_start_date <= end_date)
+        ends_within_time = (abs_end_date >= start_date ||
+                              abs_end_date <= end_date)
+
+        starts_within_time || ends_within_time
       end
     end
   end
