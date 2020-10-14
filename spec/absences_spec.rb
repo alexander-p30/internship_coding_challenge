@@ -30,7 +30,6 @@ RSpec.describe 'Absences' do
 
   describe '#list' do
     context 'absences for user_id 644 until 2017-03-13' do
-
       let(:list) { @absences_controller.list(@user, @start_date, @end_date) }
       let(:users_confirmed_absences) do
         @user.confirmed_absences.select do |abs|
