@@ -17,3 +17,7 @@ Style/BlockComments:
 Style/IfUnlessModifier:
   Exclude:
     - 'utils/seeder.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/*'
