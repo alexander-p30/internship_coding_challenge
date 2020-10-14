@@ -34,7 +34,7 @@ module Models
     end
 
     def end_date_as_date
-      Date.parse(@start_date)
+      Date.parse(@end_date)
     end
 
     def self.all
