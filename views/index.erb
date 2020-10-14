@@ -18,11 +18,13 @@
     }
 
     div.header {
-      width: 98vw;
+      width: 100vw;
+      padding: 0;
       height: 8vh;
       display: flex;
       align-items: center;
       background-color: slateblue;
+      box-shadow: 0 1px 3px black;
     }
 
     div.list-wrapper {
@@ -57,6 +59,10 @@
       text-decoration: underline;
     }
 
+    a.header-link {
+      padding-left: 1vw;
+    }
+
     a.download {
       display: flex;
       justify-content: center;
@@ -74,7 +80,7 @@
 
 <body>
   <div class="header">
-    <a href="/">Home</a>
+    <a class="header-link" href="/">Home</a>
   </div>
 
   <% if @user %>
