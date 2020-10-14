@@ -13,11 +13,11 @@ module Models
     attr_reader :name, :user_id
 
     def pending_absences
-      Absence.pending_absences.select { |abs| abs.user_id == @user_id }
+      Absence.pending_absences.select { |abs| abs.user_id.to_s == @user_id.to_s }
     end
 
     def confirmed_absences
-      Absence.confirmed_absences.select { |abs| abs.user_id == @user_id }
+      Absence.confirmed_absences.select { |abs| abs.user_id.to_s == @user_id.to_s }
     end
 
     def self.all
