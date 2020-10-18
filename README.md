@@ -10,7 +10,7 @@
 
 ## Running the application
 
-`ruby app_controller.rb`
+`ruby app_router.rb`
 
 The application has a very basic html presentation. Colors may look oversaturated in Chrome.
 
