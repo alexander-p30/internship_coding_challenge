@@ -2,6 +2,9 @@ require_relative '../cm_challenge/api'
 require_relative '../models/absence'
 require_relative '../models/member'
 
+# POSSIBLE IMPROVEMENT: defining these columns arrays as class variables, so
+# one can easily change or add field to the class by changing these class
+# variables
 KLASSES = {
   %i[name user_id crew_id] => Models::Member,
   %i[user_id type start_date end_date] => Models::Absence

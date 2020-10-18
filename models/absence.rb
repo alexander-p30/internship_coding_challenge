@@ -20,6 +20,9 @@ module Models
       Member.find_by_user_id(@user_id)
     end
 
+    # POSSIBLE IMPROVEMENT: instead of using string as hash keys, using defined
+    # integer as class constants to improve performance (by not comparing 
+    # strings)
     def description
       absence_types_description = {
         'sickness' => 'is sick',
