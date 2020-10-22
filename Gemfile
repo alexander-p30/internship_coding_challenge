@@ -9,3 +9,6 @@ gem 'guard-rspec', require: false
 
 # Gem for iCal file exporting
 gem 'icalendar'
+
+# Gem for running the application as a web-app
+gem 'sinatra'
